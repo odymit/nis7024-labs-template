@@ -1,0 +1,1 @@
+# nis7024-labs-template
