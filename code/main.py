@@ -51,7 +51,7 @@ class Model(L.LightningModule):
 # define your attack
 class Attack():
     
-    def attack(cls, input):
+    def attack(self, input):
         # implement your attack method here
         mal_input = input
         return mal_input
@@ -60,7 +60,7 @@ class Attack():
 # define your detector
 class Detector():
 
-    def detect(cls, input):
+    def detect(self, input):
         # implement your detect method here 
         detect_results = input
         return False
