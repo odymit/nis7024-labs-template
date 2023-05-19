@@ -66,15 +66,15 @@ print("setting up training process...")
 PYTHON_DIR = os.popen("conda env list | grep %s" % ENV_NAME).read().split()[1] 
 PYTHON_PATH = PYTHON_DIR + "/bin/python3"
 print("Got PYTHON_PATH:", PYTHON_PATH)
-def task_wrapper(name, status):
+def task_wrapper(python, status):
     try:
-        exit_code = os.system("%s ./code/main.py" % name)
+        exit_code = os.system("%s ./code/main.py" % python)
         check_and_exit(exit_code, 6)
     except Exception as e:
         exc_type, exc_value, exc_traceback = sys.exc_info()
         traceback.print_exception(exc_type, exc_value, exc_traceback, limit=None)
         exit(7)
-p = Process(target=task_wrapper, args=(ENV_NAME, 6))
+p = Process(target=task_wrapper, args=(PYTHON_PATH, 6))
 p.start()
 p.join()
 # delete conda env
