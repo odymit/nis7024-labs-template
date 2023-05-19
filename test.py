@@ -78,6 +78,6 @@ p = Process(target=task_wrapper, args=(ENV_NAME, 6))
 p.start()
 p.join()
 # delete conda env
-# exit_code = os.system("conda remove -n %s --all -y" % ENV_NAME)
-# check_and_exit(exit_code, -1)
+exit_code = os.system("conda remove -n %s --all -y" % ENV_NAME)
+check_and_exit(exit_code, -1)
 print("test done!")
