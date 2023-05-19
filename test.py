@@ -33,7 +33,10 @@ check_and_exit(exit_code, 2)
 print("conda env created.")
 
 # install python packages
-exit_code = os.system("pip install -r requirements.txt")
+PIP_DIR = os.popen("conda env list | grep %s" % ENV_NAME).read().split()[1] 
+PIP_PATH = PIP_DIR + "/bin/pip3"
+print("Got PIP_PATH:", PIP_PATH)
+exit_code = os.system("%s install -r requirements.txt" % PIP_PATH)
 check_and_exit(exit_code, 3)
 print("python packages installed.")
 
@@ -75,6 +78,6 @@ p = Process(target=task_wrapper, args=(ENV_NAME, 6))
 p.start()
 p.join()
 # delete conda env
-exit_code = os.system("conda remove -n %s --all -y" % ENV_NAME)
-check_and_exit(exit_code, -1)
+# exit_code = os.system("conda remove -n %s --all -y" % ENV_NAME)
+# check_and_exit(exit_code, -1)
 print("test done!")
